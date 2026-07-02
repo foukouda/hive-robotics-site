@@ -1,0 +1,209 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Hive brand colors */
+  --color-hive-green-brand: #1B3D2C;
+  --color-hive-green-accent: #00E85C;
+  --color-hive-green: #00C853;
+  --color-hive-green-light: #40E56C;
+  --color-hive-green-dark: #004D1B;
+
+  /* Surface system (tonal depth) */
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Chart colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+/* Light theme (default) - warm off-white */
+:root {
+  --background: #F8F9FC;
+  --foreground: #141720;
+  --card: #EDEEF4;
+  --card-foreground: #141720;
+  --popover: #FFFFFF;
+  --popover-foreground: #141720;
+  --primary: #0066FF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #00C853;
+  --secondary-foreground: #FFFFFF;
+  --muted: #E8EAF0;
+  --muted-foreground: #555B6E;
+  --accent: #E8EAF0;
+  --accent-foreground: #141720;
+  --destructive: #D32F2F;
+  --border: rgba(0, 0, 0, 0.07);
+  --input: rgba(0, 0, 0, 0.05);
+  --ring: #0066FF;
+
+  /* Surface tonal system */
+  --surface: #F8F9FC;
+  --surface-dim: #EDEEF4;
+  --surface-bright: #FFFFFF;
+  --surface-container: #EDEEF4;
+  --surface-container-low: #F2F3F8;
+  --surface-container-high: #E2E4EB;
+  --surface-container-highest: #D8DAE2;
+
+  /* Charts */
+  --chart-1: #0066FF;
+  --chart-2: #00C853;
+  --chart-3: #003FA4;
+  --chart-4: #00531E;
+  --chart-5: #555B6E;
+
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  ::selection {
+    background-color: #00E85C;
+    color: #000;
+  }
+  :focus-visible {
+    outline-width: 2px !important;
+    outline-style: solid !important;
+    outline-color: #00E85C !important;
+    outline-offset: 2px !important;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #1B3D2C 0%, #00E85C 100%);
+    padding-inline: 0.15em;
+    margin-inline: -0.15em;
+  }
+  .text-gradient-green {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00C853 0%, #40E56C 100%);
+    padding-inline: 0.15em;
+    margin-inline: -0.15em;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  /* Serif italic accent for premium feel */
+  .font-serif-accent {
+    font-family: var(--font-heading);
+    font-style: italic;
+  }
+
+  /* Hive — Editorial, premium, minimal */
+  .hive-section { @apply py-24 lg:py-40; }
+  .hive-container { @apply max-w-6xl mx-auto px-6 lg:px-8; }
+  .hive-label {
+    @apply inline-flex items-center gap-3 text-[0.7rem] font-mono uppercase tracking-[0.3em] text-[#1B3D2C] mb-8;
+  }
+  .hive-label::before {
+    content: "";
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+  .hive-heading {
+    @apply font-semibold tracking-[-0.02em] leading-[0.98] text-[clamp(2.5rem,5.5vw,6rem)];
+  }
+  .hive-body { @apply text-lg lg:text-xl text-[#4A5568] leading-relaxed; }
+  .hive-card {
+    @apply bg-white rounded-3xl border border-black/[0.06] p-8 lg:p-10 transition-all duration-300;
+  }
+
+  /* Editorial helpers */
+  .hive-eyebrow { @apply text-[0.7rem] font-mono uppercase tracking-[0.3em] text-[#718096]; }
+  .hive-rule { @apply h-px w-full bg-black/[0.08]; }
+  .hive-link {
+    @apply inline-flex items-center gap-2 font-medium text-[#1B3D2C] transition-colors hover:text-[#00C853];
+  }
+}
+
+/* Marquee défilement logos partenaires */
+@keyframes hive-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: hive-marquee 40s linear infinite;
+  will-change: transform;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
